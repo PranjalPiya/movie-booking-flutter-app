@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_learn_one/core/extensions/text_extensions.dart';
+import 'package:flutter_learn_one/core/theme/colors.dart';
 
-Widget customButton({final String? text, void Function()? onPressed}) {
+Widget customButton(
+    {BuildContext? context, final String? text, void Function()? onPressed}) {
   return SizedBox(
     width: double.infinity,
     height: 50,
@@ -12,7 +15,10 @@ Widget customButton({final String? text, void Function()? onPressed}) {
             backgroundColor: Colors.red.shade300),
         child: Text(
           '$text',
-          style: const TextStyle(color: Colors.white),
+          style: context!.textTheme.bodyMedium!.copyWith(
+            // color: AppColors.primaryColor,
+            fontWeight: FontWeight.bold,
+          ),
         )),
   );
 }

@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_learn_one/core/custom/custom_button.dart';
 import 'package:flutter_learn_one/core/custom/custom_logo.dart';
 import 'package:flutter_learn_one/core/custom/custom_textfield.dart';
+import 'package:flutter_learn_one/core/extensions/text_extensions.dart';
+import 'package:flutter_learn_one/core/theme/colors.dart';
+import 'package:flutter_learn_one/presentation/home/screen/home_screen.dart';
 import 'package:flutter_learn_one/presentation/register/screen/register_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -33,11 +36,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 SizedBox(
                   height: size.height * 0.14,
                 ),
-                Text(
+                const Text(
                   'Login to your account',
                   style: TextStyle(
                       fontSize: 17,
-                      color: Colors.red.shade300,
+                      color: AppColors.primaryColor,
                       fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 13),
@@ -50,18 +53,24 @@ class _LoginScreenState extends State<LoginScreen> {
                     prefixIconData: Icons.lock_outline,
                     suffixIconData: Icons.remove_red_eye_outlined),
                 const SizedBox(height: 15),
-                Align(
+                const Align(
                   alignment: Alignment.topRight,
                   child: Text(
                     'Forget Password?',
                     style: TextStyle(
                       fontSize: 13,
-                      color: Colors.red.shade300,
+                      color: AppColors.primaryColor,
                     ),
                   ),
                 ),
                 const SizedBox(height: 25),
-                customButton(onPressed: () {}, text: 'Login'),
+                customButton(
+                    context: context,
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (_) => const HomePageScreen()));
+                    },
+                    text: 'Login'),
                 const SizedBox(height: 20),
                 Center(
                   child: RichText(
@@ -71,13 +80,17 @@ class _LoginScreenState extends State<LoginScreen> {
                           children: [
                         const TextSpan(text: 'Dont\'t have an account ? '),
                         TextSpan(
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (_) => const RegisterScreen()));
-                              },
-                            text: 'Sign up',
-                            style: TextStyle(color: Colors.red.shade300)),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (_) => const RegisterScreen()));
+                            },
+                          text: 'Sign up',
+                          style: context.textTheme.bodyMedium!.copyWith(
+                            color: AppColors.primaryColor,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ])),
                 )
               ],

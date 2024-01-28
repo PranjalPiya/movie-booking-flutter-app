@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_learn_one/core/custom/custom_button.dart';
 import 'package:flutter_learn_one/core/custom/custom_logo.dart';
 import 'package:flutter_learn_one/core/custom/custom_textfield.dart';
+import 'package:flutter_learn_one/core/extensions/text_extensions.dart';
+import 'package:flutter_learn_one/core/theme/colors.dart';
 import 'package:flutter_learn_one/presentation/login/screen/login_screen.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -55,7 +57,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     suffixIconData: Icons.remove_red_eye_outlined),
                 const SizedBox(height: 15),
                 const SizedBox(height: 25),
-                customButton(onPressed: () {}, text: 'Login'),
+                customButton(context: context, onPressed: () {}, text: 'Login'),
                 const SizedBox(height: 20),
                 Center(
                   child: RichText(
@@ -65,13 +67,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           children: [
                         const TextSpan(text: 'Already have an account ? '),
                         TextSpan(
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (_) => const LoginScreen()));
-                              },
-                            text: 'Login',
-                            style: TextStyle(color: Colors.red.shade300)),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (_) => const LoginScreen()));
+                            },
+                          text: 'Login',
+                          style: context.textTheme.bodyMedium!.copyWith(
+                            color: AppColors.primaryColor,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ])),
                 )
               ],
